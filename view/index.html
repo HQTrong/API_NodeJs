@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wassup chat app</title>
+    <title>Real-time Chat Service</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -12,15 +12,18 @@
     <section class="chat__section">
         <div class="brand">
             <img height="40" src="/wassup.png" alt="">
-            <h1>Wassup</h1>
+            <h1>Chat Service</h1>
         </div>
         <div class="message__area"></div>
         <div>
             <textarea id="textarea" cols="30" rows="1" placeholder="Write a message..."></textarea>
         </div>
     </section>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/client.js"></script>
+    <script type="module" src="/client.js"></script>
+
 </body>
 
 </html>

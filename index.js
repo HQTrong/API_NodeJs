@@ -8,14 +8,15 @@ const userRoute = require("./routes/user");
 const paymentRoute = require("./routes/payment");
 const postRoute = require('./routes/post');
 const chatRoute = require("./routes/chat");
+const elasticRoute = require("./elastic/route");
 const connect = require("./connection/connect");
 const swaggerJSDoc = require('swagger-jsdoc');
 const options = require("./swagger/configSwagger");
+//const botTelegram = require("./telegram_bot/config");
+//const message = require("./firebase/config");
 const app = express();
 //socket
 const http = require('http').createServer(app);
-
-
 dotenv.config();
 
 //Use swagger
@@ -25,6 +26,7 @@ app.use('/swagger', swaggerUI.serve, swaggerUI.setup(specs));
 app.use(cors());
 app.use(cookiesParser());
 app.use(express.json());
+
 
 //Route auth
 app.use("/v1/auth", authRoute);
@@ -39,9 +41,12 @@ app.use("/v1/payment", paymentRoute);
 app.use("/v1/post", postRoute);
 
 //Route chat
-app.use("/chat", chatRoute);
-app.use(express.static(__dirname + '/public'))
+app.use("/v1/chat", chatRoute);
 
+//Route elastic
+app.use("/v1/elastic", elasticRoute);
+
+app.use(express.static(__dirname + '/socket'))
 
 //Socket 
 const io = require('socket.io')(http)
@@ -52,7 +57,6 @@ io.on('connection', (socket) => {
     })
 
 })
-
 const PORT = process.env.PORT || 4000
 
 http.listen(PORT, () => {
